@@ -35,7 +35,8 @@ module Redmine
             :fenced_code_blocks => true,
             :tables => true,
             :strikethrough => true,
-            :superscript => true
+            :superscript => true,
+            :no_intra_emphasis => true
           }
 
           markdown = ::Redcarpet::Markdown.new(HTMLwithSyntaxHighlighting, opts)
