@@ -29,7 +29,16 @@ module Redmine
         end
 
         def to_html(&block)
-          markdown = ::Redcarpet::Markdown.new(HTMLwithSyntaxHighlighting, :autolink => true, :space_after_headers => true,:fenced_code_blocks => true, :tables => true, :strikethrough => true, :superscript => true)
+          opts = {
+            :autolink => true,
+            :space_after_headers => true,
+            :fenced_code_blocks => true,
+            :tables => true,
+            :strikethrough => true,
+            :superscript => true
+          }
+
+          markdown = ::Redcarpet::Markdown.new(HTMLwithSyntaxHighlighting, opts)
           markdown.render(@text)
         rescue => e
           return("<pre>problem parsing wiki text: #{e.message}\n"+
