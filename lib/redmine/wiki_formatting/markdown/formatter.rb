@@ -4,6 +4,8 @@ require 'redcarpet'
 
 
 class HTMLwithSyntaxHighlighting < ::Redcarpet::Render::HTML
+  include ::Redcarpet::Render::SmartyPants
+
   def block_code(code, language)
     if language != nil 
       "<pre>\n<code class='#{language} syntaxhl'>" \
