@@ -29,7 +29,7 @@ Prerequisites
 -------------
 
 *  Redmine 1.x, Remine 2.x (**Note**: This repo is not being tested with Redmine 1.x)
-*  Redcarpetr >= 2.0.0 - see https://github.com/tanoku/redcarpet
+*  Redcarpet >= 2.0.0 - see https://github.com/tanoku/redcarpet
 
 
 Installation
@@ -37,25 +37,24 @@ Installation
 
 1. Clone and checkout plugin into the appropriate plugins directory
 
-``` 
+    ``` 
     cd plugins
     git clone https://github.com/joerocklin/redmine_redcarpet_formatter.git
-
+    ```
 
 2.  Install Redcarpet gem. Redcarpet version should be 2.0.0 or later.
-```
+    ```
     bundle install
-```
-or if you aren't using bundler
-```
+    ```
+    or if you aren't using bundler
+    ```
     sudo gem install --version 2.0.0 redcarpet
-```
+    ```
 
 3.  Run rake at Redmine installed directory.
-
-```
+    ```
     RAILS_ENV=production rake redmine:plugins:migrate
-```
+    ```
 
 4.  Restart Redmine.
 5.  Installed plugins are listed on 'Admin -> Information' screen.
