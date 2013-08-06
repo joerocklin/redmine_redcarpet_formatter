@@ -24,18 +24,18 @@ class HTMLwithSyntaxHighlighting < ::Redcarpet::Render::HTML
   include ::Redcarpet::Render::SmartyPants
 
   def block_code(code, language)
-    if language != nil 
+    if language != nil
       "<pre>\n<code class='#{language} syntaxhl'>" \
       + Redmine::SyntaxHighlighting.highlight_by_language(code, language) \
       + "</code>\n</pre>"
-    else 
+    else
       "<pre>\n" + CGI.escapeHTML(code) + "</pre>"
     end
   end
   def block_quote(quote)
     "<blockquote>\n" << quote.gsub(/\n([^<])/,'<br>\1') << "</blockquote>\n"
   end
-end  
+end
 
 module Redmine
   module WikiFormatting
@@ -48,6 +48,7 @@ module Redmine
         end
 
         def to_html(&block)
+          enable_hardwrap = Setting.plugin_redmine_redcarpet_formatter['enable_hardwrap'] == '1'
           opts = {
             :autolink => true,
             :space_after_headers => true,
@@ -55,7 +56,8 @@ module Redmine
             :tables => true,
             :strikethrough => true,
             :superscript => true,
-            :no_intra_emphasis => true
+            :no_intra_emphasis => true,
+            :hard_wrap => enable_hardwrap
           }
 
           markdown = ::Redcarpet::Markdown.new(HTMLwithSyntaxHighlighting, opts)
@@ -97,13 +99,13 @@ module Redmine
             if line =~ /^(~~~|```)/
               pre = pre == :pre ? :none : :pre
             elsif pre == :none
-              
+
               level = if line =~ /^(#+)/
                         $1.length
-                      elsif line.strip =~ /^=+$/ 
+                      elsif line.strip =~ /^=+$/
                         line = eval(state).pop + line
                         1
-                      elsif line.strip =~ /^-+$/ 
+                      elsif line.strip =~ /^-+$/
                         line = eval(state).pop + line
                         2
                       else

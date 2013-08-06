@@ -51,6 +51,7 @@ Installation
     sudo gem install --version 2.0.0 redcarpet
     ```
 
+<<<<<<< HEAD
 3.  Run rake at Redmine installed directory.
     ```
     RAILS_ENV=production rake redmine:plugins:migrate
